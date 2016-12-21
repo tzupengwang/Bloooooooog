@@ -32,6 +32,11 @@ Localhost: ${chalk.magenta(`http://localhost:${port}`)}
 ${chalk.blue(`Press ${chalk.italic('CTRL-C')} to stop`)}
     `);
   },
+
+  // Called when mongodb is connected
+  dbConnected: (mongoUri, dbName, username) => {
+    console.log(`User "${chalk.blue(username)}" connected to mongodb "${chalk.blue(dbName)}" on server "${chalk.blue(mongoUri)}" ${chalk.green('✓')}`);
+  },
 };
 
 module.exports = logger;

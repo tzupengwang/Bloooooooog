@@ -1,6 +1,9 @@
 node_modules
 build
 
+# identity files
+server/privateSettings.js
+
 .DS_Store
 npm-debug.log
 
