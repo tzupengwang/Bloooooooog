@@ -1,16 +1,12 @@
 import React from 'react';
 const { Component } = React;
 
-export default class App extends Component {
-  constructor() {
-    super();
-  }
+const App = (props) => {
+  return (
+    <div id="app">
+    {React.Children.toArray(props.children)}
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div id="app">
-        Bloooooooog
-      </div>
-    );
-  }
-}
+export default App;

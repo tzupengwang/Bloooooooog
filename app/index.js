@@ -10,7 +10,6 @@ import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
 import configureStore from './store';
 
-import App from './containers/App';
 import './global-styles.styl';
 
 // Create redux store with history
@@ -28,8 +27,26 @@ const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: selectLocationState(),
 });
 
+import App from './containers/App';
+import createRoutes from './routes';
+const rootRoute = {
+  component: App,
+  path: '/',
+  childRoutes: createRoutes(store),
+};
+
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <Router
+      history={history}
+      routes={rootRoute}
+      render={
+        // Scroll to top when going to a new page, imitating default browser
+        // behaviour
+        applyRouterMiddleware(useScroll())
+      }
+    />
+  </Provider>,
   document.getElementById('react-app-root')
 );
 
