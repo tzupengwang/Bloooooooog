@@ -31,7 +31,6 @@ import App from './containers/App';
 import createRoutes from './routes';
 const rootRoute = {
   component: App,
-  path: '/',
   childRoutes: createRoutes(store),
 };
 
