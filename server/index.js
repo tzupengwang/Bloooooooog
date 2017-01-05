@@ -1,18 +1,22 @@
+const bodyParser = require('body-parser');
 const express = require('express');
-const logger = require('./logger');
+const methodOverride = require('method-override');
 const resolve = require('path').resolve;
+
+const logger = require('./logger');
 
 const argv = require('minimist')(process.argv.slice(2));
 const setup = require('./middlewares/frontendMiddleware');
-const isDev = process.env.NODE_ENV !== 'production';
-const app = express();
-const methodOverride = require('method-override');
-const bodyParser = require('body-parser');
 // import your private identities for mongodb, etc
 const settings = require('./privateSettings');
 
+const isDev = process.env.NODE_ENV !== 'production';
+
+const app = express();
+
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
-// app.use('/api', myApi);
+const apiRouter = require('./routers/api');
+app.use('/api', apiRouter);
 
 // DB connection
 const mongoose = require('mongoose');

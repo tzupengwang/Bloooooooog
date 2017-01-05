@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node server",
+    "start": "cross-env NODE_ENV=development nodemon -w ./server server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "clean": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress",
