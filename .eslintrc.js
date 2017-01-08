@@ -72,4 +72,11 @@ module.exports = {
     "redux-saga/yield-effects": 2,
     "require-yield": 0
   },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./internals/webpack/webpack.test.babel.js"
+      }
+    }
+  },
 };

@@ -23,14 +23,16 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/HomePage/reducer'),
+          System.import('containers/Slideshow/reducer'),
           System.import('containers/HomePage/sagas'),
           System.import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('home', reducer.default);
+        importModules.then(([reducer1, reducer2, sagas, component]) => {
+          injectReducer('home', reducer1.default);
+          injectReducer('slideshow', reducer2.default);
           injectSagas(sagas.default);
 
           renderRoute(component);
@@ -38,7 +40,7 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }
+    },
     /* route settings from the boilerplate
     {
       path: '/',

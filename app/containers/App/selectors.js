@@ -11,19 +11,14 @@ const selectCurrentUser = () => createSelector(
   (globalState) => globalState.get('currentUser')
 );
 
-const selectLoading = () => createSelector(
+const selectWidth = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.get('loading')
+  (globalState) => globalState.getIn(['viewport', 'width'])
 );
 
-const selectError = () => createSelector(
+const selectHeight = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.get('error')
-);
-
-const selectRepos = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.getIn(['userData', 'repositories'])
+  (globalState) => globalState.getIn(['viewport', 'height'])
 );
 
 const selectLocationState = () => {
@@ -45,8 +40,7 @@ const selectLocationState = () => {
 export {
   selectGlobal,
   selectCurrentUser,
-  selectLoading,
-  selectError,
-  selectRepos,
+  selectWidth,
+  selectHeight,
   selectLocationState,
 };

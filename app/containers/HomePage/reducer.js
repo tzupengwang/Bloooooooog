@@ -1,9 +1,9 @@
-import { REQUEST_RECENT, RECEIVE_RECENT } from './actions';
 import { fromJS } from 'immutable';
+import { REQUEST_RECENT, RECEIVE_RECENT } from './actions';
 
 const initialState = fromJS({
   isFetching: false,
-  posts: [],
+  posts: false,
 });
 
 const recentReducer = (state = initialState, action) => {
@@ -18,6 +18,6 @@ const recentReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default recentReducer;

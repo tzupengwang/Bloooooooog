@@ -1,20 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-const { Component } = React;
-import RecentPosts from '../../components/RecentPosts';
+import Slideshow from 'containers/Slideshow';
 import { requestRecent } from './actions';
 
-const mapStateToProps = state => {
-  return {
-    posts: state.get('home').get('posts'),
-  }
-};
+const { Component } = React;
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getRecentPosts: () => dispatch(requestRecent()),
-  };
-}
+const mapStateToProps = (state) => ({
+  posts: state.get('home').get('posts'),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getRecentPosts: () => dispatch(requestRecent()),
+});
 
 class HomePage extends Component {
   componentDidMount() {
@@ -25,13 +22,21 @@ class HomePage extends Component {
     const { posts } = this.props;
     return (
       <div>
-        <RecentPosts posts={posts} />
+        <Slideshow posts={posts} />
       </div>
     );
   }
 }
 
+HomePage.propTypes = {
+  posts: React.PropTypes.oneOfType([
+    React.PropTypes.array,
+    React.PropTypes.bool,
+  ]),
+  getRecentPosts: React.PropTypes.func,
+};
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (HomePage);
+)(HomePage);
