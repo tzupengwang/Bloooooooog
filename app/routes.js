@@ -46,8 +46,8 @@ export default function createRoutes(store) {
       name: 'single',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          // System.import('containers/SinglePage/reducer'),
-          // System.import('containers/SignlePage/sagas'),
+          System.import('containers/SinglePage/reducer'),
+          System.import('containers/SinglePage/sagas'),
           System.import('containers/SinglePage'),
         ]);
 

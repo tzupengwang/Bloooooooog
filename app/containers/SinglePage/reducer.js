@@ -1,28 +1,24 @@
-import { REQUEST_RECENT, RECEIVE_RECENT } from './actions';
+import { REQUEST_POST, RECEIVE_POST } from './actions';
 import { fromJS } from 'immutable';
 
 const initialState = fromJS({
-  initHeader: {
-    position: {
-      top: 0,
-      left: 0,
-    },
-    width: 0,
-  }
+  lastUpdated: '',
+  isFetching: false,
+  post: false,
 });
 
-const signleReducer = (state = initialState, action) => {
+const singleReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REQUEST_RECENT:
+    case REQUEST_POST:
       return state.set('isFetching', true);
-    case RECEIVE_RECENT:
+    case RECEIVE_POST:
       return state
         .set('isFetching', false)
-        .set('posts', action.posts)
+        .set('post', action.post)
         .set('lastUpdated', action.receiveAt);
     default:
       return state;
   }
 }
 
-export default recentReducer;
+export default singleReducer;

@@ -32,7 +32,11 @@ PostSchema.statics.createNewPost = function(post) {
   post.postId = `${post.date}-${post.title.toLowerCase().split(' ').join('-')}`;
   (new this(post)).save();
 }
-
+PostSchema.statics.querySinglePost = function (postId) {
+  var post = this.findOne({ postId: postId }).exec();
+  console.log(post);
+  return post;
+}
 PostSchema.statics.queryRecentPosts = function(limit) {
   limit = limit || 5;
   return this.find({}).sort({ created_at: 'descending' }).limit(limit).lean().exec();
