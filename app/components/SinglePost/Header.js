@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router';
-const { Component } = React;
+const { PureComponent } = React;
+// import './header.css';
 const Preview = styled.div`
   box-sizing: border-box;
   width: 100%;
@@ -11,11 +11,8 @@ const Preview = styled.div`
   background: url('https://c5.staticflickr.com/2/1568/24504300316_3c9084c9bc_b.jpg') center no-repeat;
   background: url('http://standardfilms.tv/wp-content/uploads/2016/08/opera-1280x720-c-default.jpg') center no-repeat;
   background-size: cover;
-  transform: scale(0.9, 0.9);
-  transition: opacity 1s;
-  opacity: ${props => (props._hidden === true) ? 0 : 1};
+  transition: width 1s;
 `;
-
 
 const TextWrapper = styled.div`
   z-index: 5;
@@ -28,7 +25,7 @@ const TextWrapper = styled.div`
   -ms-user-select: none;
   user-select: none;
   position: absolute;
-  top: 53%;
+  top: 40%;
   left: 50%;
   display: block;
   width: 100%;
@@ -49,38 +46,30 @@ const Title = styled.h1`
   font-family: Roboto;
 `;
 
-class PostPreview extends Component {
-  _onClickHandler(e) {
-    this.props.postOnClick();
-    e.preventDefault();
-    setTimeout(() => {
-      this.refs.link.click();
-    }, 1000);
-    console.log(this.props.post);
+
+class Header extends PureComponent {
+  constructor() {
+    super();
   }
+
   render() {
-    const props = this.props;
-    if (!props.post) return false;
-    const displayPost = props.displayPost;
-    const { title, author, date, category, postId } = props.post;
     return (
-      <Preview _hidden={(displayPost == postId || displayPost === false) ? false : true}>
-        <a ref="link" href={`/${postId}`}></a>
-        <TextWrapper onClick={this._onClickHandler.bind(this)}>
-          <p>{`${author} | ${date}`}</p>
-          <p>{category}</p>
-          <Title>{title}</Title>
+      <Preview>
+        <TextWrapper>
+          <p>123</p>
+          <p>456</p>
+          <Title>ABCCHDD</Title>
         </TextWrapper>
       </Preview>
     );
   }
 };
 
-PostPreview.propTypes = {
-  post: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.bool,
-  ]),
-};
+// PostPreview.propTypes = {
+//   post: React.PropTypes.oneOfType([
+//     React.PropTypes.object,
+//     React.PropTypes.bool,
+//   ]),
+// };
 
-export default PostPreview;
+export default Header;

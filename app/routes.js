@@ -41,6 +41,29 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     },
+    {
+      path: '/:id',
+      name: 'single',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          // System.import('containers/SinglePage/reducer'),
+          // System.import('containers/SignlePage/sagas'),
+          System.import('containers/SinglePage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        // importModules.then(([reducer, sagas, component]) => {
+          //injectReducer('single', reducer.default);
+          //injectSagas(sagas.default);
+        importModules.then(([component]) => {
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
     /* route settings from the boilerplate
     {
       path: '/',

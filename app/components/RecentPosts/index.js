@@ -58,7 +58,7 @@ class RecentPosts extends PureComponent {
   }
 
   render() {
-    const { posts } = this.props;
+    const { posts, postOnClicked, displayPost } = this.props;
     if (!posts) return false;
 
     const [firstPost, ...otherPosts] = posts;
@@ -66,7 +66,11 @@ class RecentPosts extends PureComponent {
       <CenterColumn>
         <Container>
           <div ref={(elem) => this.setScrollItem(0, elem)} >
-            <PostPreview post={firstPost} />
+            <PostPreview
+              post={firstPost}
+              postOnClick={() => postOnClicked(firstPost.postId)}
+              displayPost={displayPost}
+            />
           </div>
           <List>
             {
@@ -75,7 +79,11 @@ class RecentPosts extends PureComponent {
                   ref={(elem) => this.setScrollItem(idx + 1, elem)}
                   key={post.postId}
                 >
-                  <PostPreview post={post} />
+                  <PostPreview
+                    post={post}
+                    postOnClick={() => postOnClicked(post.postId)}
+                    displayPost={displayPost}
+                  />
                 </div>
               ))
             }

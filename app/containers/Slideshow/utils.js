@@ -61,7 +61,7 @@ export class ScrollController {
 
   setScrollContainer(container) {
     this.scrollContainer = container;
-    this.scrollContainer.style.height = `${((this.scrollItems.length - 1) * document.body.offsetWidth * 0.66666667 * 0.5625) + document.body.offsetHeight}px`;
+    if (this.scrollContainer != null) this.scrollContainer.style.height = `${((this.scrollItems.length - 1) * document.body.offsetWidth * 0.66666667 * 0.5625) + document.body.offsetHeight}px`;
   }
 
   clear() {

@@ -27,13 +27,15 @@ class SlideShow extends Component {
   }
 
   render() {
-    const { focused, posts } = this.props;
+    const { focused, posts, postOnClicked, displayPost } = this.props;
     if (!posts) return false;
 
     return (
       <div ref={(dom) => this.scrollController.setScrollContainer(dom)}>
         <RecentPosts
           posts={posts}
+          postOnClicked={postOnClicked}
+          displayPost={displayPost}
           scrollController={this.scrollController}
         />
       </div>

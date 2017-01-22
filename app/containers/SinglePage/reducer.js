@@ -1,13 +1,17 @@
+import { REQUEST_RECENT, RECEIVE_RECENT } from './actions';
 import { fromJS } from 'immutable';
-import { REQUEST_RECENT, RECEIVE_RECENT, BROADCAST_HIDDEN } from './actions';
 
 const initialState = fromJS({
-  isFetching: false,
-  posts: false,
-  displayPost: false,
+  initHeader: {
+    position: {
+      top: 0,
+      left: 0,
+    },
+    width: 0,
+  }
 });
 
-const recentReducer = (state = initialState, action) => {
+const signleReducer = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_RECENT:
       return state.set('isFetching', true);
@@ -16,13 +20,9 @@ const recentReducer = (state = initialState, action) => {
         .set('isFetching', false)
         .set('posts', action.posts)
         .set('lastUpdated', action.receiveAt);
-    case BROADCAST_HIDDEN:
-      console.log('broadcasting');
-      return state
-        .set('displayPost', action.from);
     default:
       return state;
   }
-};
+}
 
 export default recentReducer;

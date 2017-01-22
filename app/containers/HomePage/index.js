@@ -1,16 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Slideshow from 'containers/Slideshow';
-import { requestRecent } from './actions';
+import { requestRecent, broadcastHidden } from './actions';
 
 const { Component } = React;
 
 const mapStateToProps = (state) => ({
   posts: state.get('home').get('posts'),
+  displayPost: state.get('home').get('displayPost'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getRecentPosts: () => dispatch(requestRecent()),
+  postOnClicked: (from) => dispatch(broadcastHidden(from)),
 });
 
 class HomePage extends Component {
@@ -19,10 +21,14 @@ class HomePage extends Component {
   }
 
   render() {
-    const { posts } = this.props;
+    const { posts, postOnClicked, displayPost } = this.props;
     return (
       <div>
-        <Slideshow posts={posts} />
+        <Slideshow
+          posts={posts}
+          postOnClicked={postOnClicked}
+          displayPost={displayPost}
+        />
       </div>
     );
   }
