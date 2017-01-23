@@ -5,8 +5,10 @@ const { PureComponent } = React;
 const Preview = styled.div`
   box-sizing: border-box;
   width: 100%;
+  max-height: 100vh;
   height: 0;
   padding-bottom: 56.25%;
+  background-position: center;
   background: url('https://c5.staticflickr.com/8/7046/27527805300_fc7c939125_b.jpg') center no-repeat;
   background: url('https://c5.staticflickr.com/2/1568/24504300316_3c9084c9bc_b.jpg') center no-repeat;
   background: url('http://standardfilms.tv/wp-content/uploads/2016/08/opera-1280x720-c-default.jpg') center no-repeat;

@@ -46,7 +46,7 @@ const Code = (props) => {
         let newline = line.split('\t');
         const len = newline.length;
         for (let i = len - 1; i > 0; i -= 1) {
-          newline.splice(i, 0, <Space>----</Space>);
+          newline.splice(i, 0, <Space key={'space'+i}>----</Space>);
         }
         return (
           <p key={'line'+i}>{newline}</p>
@@ -63,18 +63,43 @@ class Content extends PureComponent {
   }
 
   render() {
+    const { content } = this.props;
+    if (!content) return false;
     return (
       <Container>
-        <Text>{g1}</Text>
-        <Code>{c1}</Code>
-        <Image src="https://c5.staticflickr.com/8/7046/27527805300_fc7c939125_b.jpg"/>
-        <Text>{g2}</Text>
+        {
+          JSON.parse(content).map((p, i) => {
+            switch (p.type) {
+              case 'Image':
+                return (<Image key={'image'+i} src={p.content} />);
+              case 'Code':
+                return (<Code key={'code'+i}>{p.content}</Code>);
+              default:
+                return (<Text key={'text'+i}>{p.content}</Text>);
+            }
+          })
+        }
+
       </Container>
     );
   }
 };
-
-const c1 = '#include<stdio.h>\nint main() {\n \t printf(\"Hello world!\\n\");\n \t\t return 0;\n}';
-const g1 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis laoreet nisi quis nulla euismod mollis. Suspendisse quis turpis ac diam posuere pretium blandit eget massa. Donec sodales nisi a ante elementum, quis posuere quam aliquet. Cras posuere augue a nibh sodales, et lacinia nibh mollis. Suspendisse at finibus orci. Pellentesque vel elit bibendum, eleifend purus ut, molestie sem. Aliquam eget faucibus lacus. Praesent nec eros dignissim, aliquam mi vitae, efficitur enim. Praesent maximus cursus nunc nec malesuada. Vivamus at nisl lacus. Donec pretium magna ut orci efficitur scelerisque. Donec a rutrum leo. Sed in lectus vestibulum, faucibus lorem ac, fringilla metus.';
-const g2 = 'Morbi non eros quis nibh euismod condimentum. Donec ultrices molestie enim. Sed nisl urna, laoreet at lobortis eget, laoreet non metus. Donec id lectus neque. Pellentesque posuere, lectus quis posuere viverra, lacus libero rutrum leo, at ullamcorper mauris mauris ac leo. Morbi in mauris orci. Morbi rhoncus enim tincidunt massa porttitor tempus. Aliquam fermentum, metus at scelerisque dignissim, nisl nunc congue ex, ac varius dui dui eleifend ipsum.';
+// const content = JSON.stringify([
+//   {
+//     type: 'Text',
+//     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis laoreet nisi quis nulla euismod mollis. Suspendisse quis turpis ac diam posuere pretium blandit eget massa. Donec sodales nisi a ante elementum, quis posuere quam aliquet. Cras posuere augue a nibh sodales, et lacinia nibh mollis. Suspendisse at finibus orci. Pellentesque vel elit bibendum, eleifend purus ut, molestie sem. Aliquam eget faucibus lacus. Praesent nec eros dignissim, aliquam mi vitae, efficitur enim. Praesent maximus cursus nunc nec malesuada. Vivamus at nisl lacus. Donec pretium magna ut orci efficitur scelerisque. Donec a rutrum leo. Sed in lectus vestibulum, faucibus lorem ac, fringilla metus.',
+//   },
+//   {
+//     type: 'Code',
+//     content: '#include<stdio.h>\nint main() {\n \t printf(\"Hello world!\\n\");\n \t\t return 0;\n}',
+//   },
+//   {
+//     type: 'Image',
+//     content: 'https://c5.staticflickr.com/8/7046/27527805300_fc7c939125_b.jpg',
+//   },
+//   {
+//     type: 'Text',
+//     content: 'Morbi non eros quis nibh euismod condimentum. Donec ultrices molestie enim. Sed nisl urna, laoreet at lobortis eget, laoreet non metus. Donec id lectus neque. Pellentesque posuere, lectus quis posuere viverra, lacus libero rutrum leo, at ullamcorper mauris mauris ac leo. Morbi in mauris orci. Morbi rhoncus enim tincidunt massa porttitor tempus. Aliquam fermentum, metus at scelerisque dignissim, nisl nunc congue ex, ac varius dui dui eleifend ipsum.',
+//   }
+// ]);
 export default Content;
