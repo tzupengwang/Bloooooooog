@@ -21,7 +21,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const { posts, postOnClicked, displayPost } = this.props;
+    const { posts, postOnClicked, displayPost, children } = this.props;
     return (
       <div>
         <Slideshow
@@ -29,6 +29,7 @@ class HomePage extends Component {
           postOnClicked={postOnClicked}
           displayPost={displayPost}
         />
+        {React.Children.toArray(children)}
       </div>
     );
   }

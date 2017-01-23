@@ -93,8 +93,22 @@ export class ScrollController {
       }
     });
     setTimeout(() => {
-      this.scrollItems[index].elem.style.transition = 'transform .4s ease-in 0s';
-      this.scrollItems[index].elem.style.transform += ` scale(${Math.max(this.container.offsetHeight / 0.9 / (this.container.offsetWidth * 0.66666667 * 0.5625), 3 / 2 / 0.9 )})`;
+      this.scrollItems[index].elem.style.transition = 'transform .4s ease-in 0s, opacity .3s ease-in .4s';
+      this.scrollItems[index].elem.style.transform += ` scale(${Math.max(this.container.offsetHeight / 0.9 / (this.container.offsetWidth * 0.66666667 * 0.5625), 3 / 2 / 0.9)})`;
+      this.scrollItems[index].elem.style.opacity = '0';
     }, 600);
+
+    setTimeout(() => this.reset(), 1300);
+    console.log('FOCUS');
+  }
+
+  reset() {
+    console.log('reset');
+    this.scrollItems.forEach((item) => {
+      item.elem.style.transition = 'none';
+      item.elem.style.transform = 'none';
+      item.elem.style.opacity = 1;
+    });
+    document.dispatchEvent(new CustomEvent('scroll', { detail: { speedMode: 'slow' } }));
   }
 }

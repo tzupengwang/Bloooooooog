@@ -19,7 +19,7 @@ class SinglePage extends Component {
     // TODO: wrong url
     console.log(this.props.location);
     console.log(this.props.params);
-    this.props.getPost(`/api/posts${this.props.location.pathname}`);
+    this.props.getPost(`/api/post/${this.props.location.pathname}`);
   }
 
   render() {
@@ -35,4 +35,4 @@ class SinglePage extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (SinglePage);
+)(SinglePage);

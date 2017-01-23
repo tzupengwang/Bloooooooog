@@ -16,10 +16,41 @@ export default function createRoutes(store) {
   // create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store);
 
+  const singlePageRoute = {
+    path: 'post/:id',
+    name: 'single',
+    getComponent(nextState, cb) {
+      console.log('here');
+      const importModules = Promise.all([
+        System.import('containers/SinglePage/reducer'),
+        System.import('containers/SinglePage/sagas'),
+        System.import('containers/SinglePage'),
+      ]);
+
+      const renderRoute = loadModule(cb);
+
+      importModules.then(([reducer, sagas, component]) => {
+        injectReducer('single', reducer.default);
+        injectSagas(sagas.default);
+
+        renderRoute(component);
+      });
+
+      importModules.catch(errorLoading);
+    },
+    onEnter(nextState, replace, callback) {
+      setTimeout(callback, 1000);
+    },
+    onChange(prevState, nextState, replace, callback) {
+      setTimeout(callback, 1000);
+    },
+  };
+
   return [
     {
       path: '/',
       name: 'home',
+      childRoutes: [singlePageRoute],
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/HomePage/reducer'),
@@ -33,28 +64,6 @@ export default function createRoutes(store) {
         importModules.then(([reducer1, reducer2, sagas, component]) => {
           injectReducer('home', reducer1.default);
           injectReducer('slideshow', reducer2.default);
-          injectSagas(sagas.default);
-
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    },
-    {
-      path: '/:id',
-      name: 'single',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/SinglePage/reducer'),
-          System.import('containers/SinglePage/sagas'),
-          System.import('containers/SinglePage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('single', reducer.default);
           injectSagas(sagas.default);
 
           renderRoute(component);

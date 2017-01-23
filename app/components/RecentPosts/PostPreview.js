@@ -51,11 +51,8 @@ const Title = styled.h1`
 
 class PostPreview extends Component {
   _onClickHandler(e) {
+    // e.preventDefault();
     this.props.postOnClick();
-    e.preventDefault();
-    // setTimeout(() => {
-      // this.refs.link.click();
-    // }, 1000);
     console.log(this.props.post);
   }
   render() {
@@ -65,12 +62,13 @@ class PostPreview extends Component {
     const { title, author, date, category, postId } = props.post;
     return (
       <Preview _hidden={(displayPost === postId || displayPost === false) ? false : true}>
-        <a ref="link" href={`/${postId}`}></a>
-        <TextWrapper onClick={this._onClickHandler.bind(this)}>
-          <p>{`${author} | ${date}`}</p>
-          <p>{category}</p>
-          <Title>{title}</Title>
-        </TextWrapper>
+        <Link to={`/post/${postId}`}>
+          <TextWrapper onClick={this._onClickHandler.bind(this)}>
+            <p>{`${author} | ${date}`}</p>
+            <p>{category}</p>
+            <Title>{title}</Title>
+          </TextWrapper>
+        </Link>
       </Preview>
     );
   }
