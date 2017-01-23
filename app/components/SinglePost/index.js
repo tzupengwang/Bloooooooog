@@ -27,10 +27,10 @@ class SinglePost extends PureComponent {
     if (!post) return false;
 
     return (
-      <div>
+      <Div>
         <Header post={post} />
         <Content content={post.content} />
-      </div>
+      </Div>
     );
   }
 }
