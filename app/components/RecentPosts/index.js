@@ -62,13 +62,17 @@ class RecentPosts extends PureComponent {
     if (!posts) return false;
 
     const [firstPost, ...otherPosts] = posts;
+                // postOnClicked(firstPost.postId);
+                      // postOnClicked(post.postId);
     return (
       <CenterColumn>
         <Container>
           <div ref={(elem) => this.setScrollItem(0, elem)} >
             <PostPreview
               post={firstPost}
-              postOnClick={() => postOnClicked(firstPost.postId)}
+              postOnClick={() => {
+                this.props.scrollController.focus(0);
+              }}
               displayPost={displayPost}
             />
           </div>
@@ -81,7 +85,9 @@ class RecentPosts extends PureComponent {
                 >
                   <PostPreview
                     post={post}
-                    postOnClick={() => postOnClicked(post.postId)}
+                    postOnClick={() => {
+                      this.props.scrollController.focus(idx + 1);
+                    }}
                     displayPost={displayPost}
                   />
                 </div>
