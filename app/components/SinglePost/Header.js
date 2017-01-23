@@ -19,11 +19,6 @@ const TextWrapper = styled.div`
   color: #fff;
   line-height: 1rem;
   text-align: left;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   position: absolute;
   top: 40%;
   left: 50%;
@@ -53,12 +48,16 @@ class Header extends PureComponent {
   }
 
   render() {
+    const props = this.props;
+    if (!props.post) return false;
+    const { title, author, date, category, postId } = props.post;
+
     return (
       <Preview>
         <TextWrapper>
-          <p>123</p>
-          <p>456</p>
-          <Title>ABCCHDD</Title>
+          <p>{`${author} | ${date}`}</p>
+          <p>{category}</p>
+          <Title>{title}</Title>
         </TextWrapper>
       </Preview>
     );

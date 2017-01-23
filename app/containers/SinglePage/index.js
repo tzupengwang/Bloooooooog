@@ -4,11 +4,9 @@ import { requestPost } from './actions';
 import SinglePost from 'components/SinglePost'
 const { Component } = React;
 
-const mapStateToProps = state => {
-  return {
-    post: state.get('single').get('post'),
-  }
-};
+const mapStateToProps = (state) => ({
+  post: state.get('single').get('post'),
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -18,19 +16,22 @@ const mapDispatchToProps = (dispatch) => {
 
 class SinglePage extends Component {
   componentDidMount() {
-    this.props.getPost(`/api/posts/2017-01-07-travelling-in-taiwan`);
+    // TODO: wrong url
+    console.log(this.props.location);
+    console.log(this.props.params);
+    this.props.getPost(`/api/posts${this.props.location.pathname}`);
   }
 
   render() {
-    const { props } = this.props;
+    const { post } = this.props;
     return (
       <div>
-        <SinglePost />
+        <SinglePost post={post}/>
       </div>
     );
   }
 }
-// export default SinglePage;
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

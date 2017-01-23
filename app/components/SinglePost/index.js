@@ -16,13 +16,13 @@ class SinglePost extends PureComponent {
   }
 
   render() {
-    // const { post } = this.props;
-    // if (!posts) return false;
+    const { post } = this.props;
+    if (!post) return false;
 
     return (
       <div>
-        <Header />
-        <Content />
+        <Header post={post} />
+        <Content content={post.content} />
       </div>
     );
   }

@@ -1,13 +1,13 @@
 import fetch from 'isomorphic-fetch';
 import { takeLatest } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';  // eslint-disable-line no-unused-vars
-import { receivePost, receiveError, REQUEST_Post } from './actions';
+import { receivePost, receiveError, REQUEST_POST } from './actions';
 
 
 const fetchData = url => (
   fetch(url).then(res => res.json())
 );
-// need a arg to know what post
+
 export function* fetchPost(action) {
   try {
     const post = yield call(fetchData, action.url);

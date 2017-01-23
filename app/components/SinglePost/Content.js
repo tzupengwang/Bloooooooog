@@ -48,7 +48,6 @@ const Code = (props) => {
         for (let i = len - 1; i > 0; i -= 1) {
           newline.splice(i, 0, <Space>----</Space>);
         }
-        console.log(newline);
         return (
           <p key={'line'+i}>{newline}</p>
         );

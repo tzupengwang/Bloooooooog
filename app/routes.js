@@ -53,10 +53,9 @@ export default function createRoutes(store) {
 
         const renderRoute = loadModule(cb);
 
-        // importModules.then(([reducer, sagas, component]) => {
-          //injectReducer('single', reducer.default);
-          //injectSagas(sagas.default);
-        importModules.then(([component]) => {
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('single', reducer.default);
+          injectSagas(sagas.default);
 
           renderRoute(component);
         });
